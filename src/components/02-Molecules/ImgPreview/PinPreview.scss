@@ -1,0 +1,12 @@
+.PinPreview{
+  display: flex;
+  flex-direction: column;
+  width: 235px;
+  max-height: 400px;
+  gap: 5px;
+
+  img{
+    object-fit:contain;
+    border-radius: 30px;
+  }
+}

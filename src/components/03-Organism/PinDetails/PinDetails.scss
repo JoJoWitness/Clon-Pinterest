@@ -1,0 +1,63 @@
+@use '../../../assets/style/colors' as color;
+
+.pinBody{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: color.$ligthGrey-bg-clon;
+  max-width: 900px;
+  height: 600px;
+  border-radius: 38px;
+  margin: 30px;
+  justify-items: center;
+  gap: 0px;
+}
+
+.pinText{
+  height: inherit;
+  display: grid;
+  grid-template-rows: 1fr 1fr 4fr 3fr 1fr;
+  align-items:flex-start;
+  width: 410px;
+  row-gap: 20px;
+  padding: 36px 36px 10px 0px;
+
+  
+ 
+}
+
+
+.pinImg{
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  max-width: 450px;
+  height: inherit;
+  object-fit: contain;
+  align-self: flex-start;
+  justify-self: flex-start;
+
+}
+
+.commentContainer{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+
+}
+
+.pinComments{
+  height: 100%;
+  overflow-y: scroll;  
+}
+
+.pinComments::-webkit-scrollbar{
+  appearance: none;
+  width: 3px;
+}
+
+.pinComments::-webkit-scrollbar-thumb{
+  background-color: color.$pink-faded-clon;
+}

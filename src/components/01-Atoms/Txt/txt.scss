@@ -1,0 +1,30 @@
+@use '../../../assets/style/colors' as color;
+
+.previewTxt{
+  color: color.$black-fontBg-clon;
+  font-size: 15px;
+}
+
+.pinTitle{
+  color: color.$black-fontBg-clon;
+  font-size: 38px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.pinTxt{
+  color: color.$black-fontBg-clon;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.boldTxt{
+  font-size: 36px;
+  font-weight: 700px;
+}
+
+.normalTxt{
+  color: color.$black-fontBg-clon;
+  font-size: 18px;
+  font-weight: 300;
+}

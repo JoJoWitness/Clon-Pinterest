@@ -1,0 +1,76 @@
+@use '../../../assets/style/colors' as color;
+
+.feedBtn, .iconBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 1rem 0.5em 1rem;
+  border: none;
+  background-color: transparent;
+  border-radius: 30px;
+  font-size: 20px;
+}
+
+.iconBtn{
+  width: 32px;
+  height: auto;
+
+  img{
+    width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  }
+}
+
+.commentBtn{
+  width: 35px;
+  height: 35px;
+  background-color: color.$pink-clon;
+  position: absolute;
+  z-index: 2;
+  align-self: flex-end;
+  right: 10px;
+
+    img{
+      width: 25px;
+      height: auto;
+        filter: color.$to-White;
+    }
+
+  
+}
+
+.feedBtn:hover{
+  color: color.$white-font-clon;
+  background-color: color.$black-fontBg-clon;
+}
+
+.colorBtn{
+  width: 100px;
+  height: 48px;
+  border: none;
+  font-size: 20px;
+  border-radius: 30px;
+  color: color.$white-font-clon;
+  background-color: color.$pink-clon;
+  justify-self: flex-end;
+  font-weight: 500;
+}
+
+.profileBtns{
+
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 1rem 0.5em 1rem;
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  color: color.$black-fontBg-clon;
+}
+
+.profileBtns:hover{
+  border-bottom: 3px solid color.$black-fontBg-clon ;
+}

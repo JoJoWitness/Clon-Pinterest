@@ -1,0 +1,40 @@
+@use '../../../assets/style/colors' as color;
+
+.ProfileWindow{
+  display: flex;
+  flex-direction: column;
+  background-color: color.$white-bg-clon;
+  width: 100%;
+}
+
+.ProfileInfo{
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  height: auto;
+  width: auto;
+  padding: 40px;
+
+  img{
+    width: 120px;
+    height: auto;
+    border-radius: 50%;
+  }
+
+
+
+}
+
+.profilePins{
+  background-color: color.$white-bg-clon;
+  padding: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 40vh;
+  overflow-y: hidden;
+}

@@ -1,0 +1,19 @@
+.userBtns{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.feedBtns{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0px;
+}
+
+.profileButtons{
+  display: flex;
+  gap: 12px;
+  width: auto;
+}

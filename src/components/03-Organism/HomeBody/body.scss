@@ -1,0 +1,12 @@
+@use '../../../assets/style/colors' as color;
+
+.body{
+  background-color: color.$white-bg-clon;
+  padding: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: hidden;
+}

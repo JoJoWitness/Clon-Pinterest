@@ -1,0 +1,38 @@
+@use '../../../assets/style/colors' as color;
+
+.uploadBody{
+  background-color: color.$grey-bg-clon;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.uploadWindow{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  background-color: color.$white-bg-clon;
+  width: 900px;
+  height: 600px;
+  border-radius: 20px;
+  gap: 15px;
+  margin: 30px;
+  padding: 40px;
+  justify-items: center;
+
+}
+
+.uploadPinBtn{
+  margin-top: 30px;
+  width: 380px;
+  height: 50px;
+  background-color: color.$pink-clon;
+  border: none;
+  border-radius: 25px;
+  color: color.$white-font-clon;
+  font-size: 20px;
+  
+}

@@ -1,0 +1,70 @@
+@use '../../../assets/style/colors' as color;
+
+.inputLabel{
+display: none;
+ 
+}
+
+.inputTitle{
+  border: none;
+  border-bottom: 2px solid color.$black-fontBg-clon;
+  appearance: none;
+  resize: none;
+  height: auto;
+  overflow: visible;
+  width: 380px;
+  color: color.$black-fontBg-clon;
+  font-size: 32px;
+  font-weight: 700;
+  
+}
+
+.inputTitle:focus, .inputTitle:active{
+  border: none;
+  outline: none;
+  border-bottom: 3px solid color.$pink-faded-clon;
+}
+
+.inputDescription{
+  text-align: center;
+  border: none;
+  width: 380px;
+  height: 180px;
+  font-size: 18px;
+  font-weight: 400;
+  resize: none;
+}
+
+.inputDescription:focus, .inputDescription:active{
+  border: none;
+  outline: none;
+ 
+  border-bottom: 3px solid color.$pink-faded-clon;
+}
+
+.inputComment{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 55px 20px 10px;
+  border: none;
+  appearance: none;
+  resize: none;
+  height: 70px;
+  overflow: visible;
+  width: 100%;
+  color: color.$black-fontBg-clon;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: color.$grey-bg-clon;
+  border-radius: 18px;
+  overflow-y: hidden;
+}
+
+.inputComment:focus, .inputComment:active{
+  border: none;
+  outline: 2px color.$pink-faded-clon solid;
+  background-color: transparent;
+
+}
