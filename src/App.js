@@ -10,7 +10,7 @@ import { firebaseConfig } from "./firebase-config";
 import { app } from "./firebase-config";
 import {getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,} from 'firebase/auth';
 import { Route, Routes, Outlet} from "react-router-dom";;
-import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, setDoc, updateDoc, doc, serverTimestamp, getDoc} from 'firebase/firestore';
+import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, getDocs ,setDoc, updateDoc, doc, serverTimestamp, getDoc} from 'firebase/firestore';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,} from 'firebase/storage';
 
 
@@ -21,34 +21,25 @@ initializeApp(firebaseConfig)
 
 const App = () => {
 
-  const [createPinWindow, useCreatePinWindow] = useState(false) 
-
+  const [createPinWindow, useCreatePinWindow] = useState(false) ;
   const [currentUser, setCurrentUser] = useState({
     displayName: "",
     email: "",
     photoURL: "",
     emailVerified:"",
-});
+  });
 
-
-
-
-
-
-const provider = new GoogleAuthProvider();
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-const storageRef = ref(storage);
-const imagesRef = ref(storage, 'images');
-const spaceRef = ref(storage, 'images/space.jpg');
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
 
 
 const signIn = async function signInPopUp() {
 
   await signInWithPopup(auth, provider)
   const user = auth.currentUser
-  await setCurrentUser({
+  setCurrentUser({
       displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL,
@@ -88,7 +79,10 @@ useEffect(()=>{
         userId: currentUser.uid
     });}}
   userAuth()
-}),[currentUser];
+},[currentUser]);
+
+ const [savedPinURI, setSavedPinURI] = useState();
+
 
 
 
@@ -106,8 +100,8 @@ useEffect(()=>{
       <Route index element={<HomeBody/>}/>
       <Route path='UploadPin'element={<UploadWindow currentUser={currentUser}/>}/>
       <Route path='Pin/:uri' element={<PinDetails currentUser={currentUser}/>}/>
-      <Route path='Profile' element={<ProfileWindow currentUser={currentUser}/>}>
-        <Route index element={<SavedPins currentUser={currentUser}/>}/>
+      <Route path='Profile' element={<ProfileWindow currentUser={currentUser} setSavedPinURI={setSavedPinURI}/>}>
+        <Route index element={<SavedPins currentUser={currentUser} savedPinURI={savedPinURI}/>}/>
         <Route path='Profile/created'/>
       </Route>
     </Routes> 
