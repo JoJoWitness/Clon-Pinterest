@@ -101,7 +101,7 @@ useEffect(()=>{
       <Route path='UploadPin'element={<UploadWindow currentUser={currentUser}/>}/>
       <Route path='Pin/:uri' element={<PinDetails currentUser={currentUser}/>}/>
       <Route path='Profile' element={<ProfileWindow currentUser={currentUser} setSavedPinURI={setSavedPinURI}/>}>
-        <Route index element={<SavedPins currentUser={currentUser} savedPinURI={savedPinURI}/>}/>
+        <Route index element={<SavedPins currentUser={currentUser} />}/>
         <Route path='Profile/created'/>
       </Route>
     </Routes> 

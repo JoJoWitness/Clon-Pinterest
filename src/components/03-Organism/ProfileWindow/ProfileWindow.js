@@ -63,32 +63,88 @@ export const ProfileWindow = (props) =>{
   )
 }
 
+// export const SavedPins = (props) => {
+
+//   const [savedPins, setSavedPins] = useState([]);
+//   // const [savedPinURI, setSavedPinURI] = useState();
+
+//   const {currentUser, savedPinURI} = props
+  
+
+//    useEffect(() => {
+//     console.log(savedPins)
+//     const fetchPins = async () =>{
+//     await fetchSavedPins()
+//     console.log(savedPins)
+//     }
+//     fetchPins()
+//    },[]);
+
+
+//     async function fetchSavedPins(){
+//       const savedPinQ=[]
+//       try{
+//           savedPinURI.forEach( async (pinURI) => { 
+//           const savedPinSnapshot = await getDoc(doc(db, 'Pin', `${pinURI}` ))           
+//           let pin = savedPinSnapshot.data();
+//           return savedPinQ.push(pin)
+//           })
+//           return setSavedPins(savedPinQ)
+//         }
+//       catch{console.log("Ryuk doesn't want the data")}
+//     return 
+//     }    
+
+  
+
+
+//   return(
+//     <div className="profilePins">
+//       {
+//       (
+//       savedPins.map(pin => 
+//         <Link to={`/Pin/${pin.storageUri}`} key={pin.storageUri}>
+//           <PinPreview
+//             pin={pin}
+//           />
+//         </Link>
+//         )
+//       )
+//       }
+
+  
+//     </div>
+//   )
+// }
+
 export const SavedPins = (props) => {
 
-  const [savedPins, setSavedPins] = useState([]);
+  const [createdPins, setCreatedPins] = useState([]);
   // const [savedPinURI, setSavedPinURI] = useState();
 
-  const {currentUser, savedPinURI} = props
+  const {currentUser} = props
   
+
    useEffect(() => {
     const fetchPins = async () =>{
-    await fetchSavedPins()
-    console.log(savedPins)
+    await fetchCreatedPins()
     }
     fetchPins()
    },[]);
 
-    async function fetchSavedPins(){
+
+    async function fetchCreatedPins(){
       const savedPinQ=[]
       try{
-          // eslint-disable-next-line react/prop-types
-          savedPinURI.forEach( async (pinURI) => { 
-          const savedPinSnapshot = await getDoc(doc(db, 'Pin', `${pinURI}` ))           
-          let pin = savedPinSnapshot.data();
-          return savedPinQ.push(pin)
-          })
-          return setSavedPins(savedPinQ)
-        }
+        console.log(currentUser)
+          const createdPinRef = query(collection(db, 'Pin'), where('uid', "==", currentUser.uid))   
+          const createdPinSnapshot = await getDocs(createdPinRef)       
+          createdPinSnapshot.forEach((pin) =>{
+          const createdPin = pin.data()
+          return savedPinQ.push(createdPin)} )
+          return setCreatedPins(savedPinQ)
+          }
+         
       catch{console.log("Ryuk doesn't want the data")}
     return 
     }    
@@ -100,7 +156,7 @@ export const SavedPins = (props) => {
     <div className="profilePins">
       {
       (
-      savedPins.map(pin => 
+      createdPins.map(pin => 
         <Link to={`/Pin/${pin.storageUri}`} key={pin.storageUri}>
           <PinPreview
             pin={pin}
