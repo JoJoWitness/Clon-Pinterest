@@ -11,7 +11,8 @@ import { TxtInput } from "../../01-Atoms/TxtInput/txtInput";
 import cover from '../../../assets/imgs/cover5.jpg'
 import arrow from '../../../assets/icons/arrow.svg'
 import { db } from "../../../App";
-import { getFirestore, collection, addDoc, query, getDoc, getDocs, orderBy, limit, onSnapshot, setDoc, updateDoc, doc, serverTimestamp, where} from 'firebase/firestore';
+import { deleteDoc, collection, addDoc, query, getDoc, getDocs, orderBy, limit, onSnapshot, setDoc, updateDoc, doc, serverTimestamp, where} from 'firebase/firestore';
+import { Link } from "react-router-dom";
 
 
 
@@ -95,15 +96,20 @@ return commentQ;
 
   const savePin= async () => {
     try{
+      const pin = pinData[0]
       const pinRef = await getDoc(doc(db, "Users", `${currentUser.uid}`, 'Pin Saved', `${storageUri}`))
-      if (pinRef.exists() || (pinData.uid == currentUser.uid)){
+      if (pinRef.exists() 
+      // || (pinData.uid == currentUser.uid)
+      ){
         return console.log("The file is already saved or you're its creator.")
       }
       else{
-        console.log('ryu')
-        
+        console.log('ryu')  
       await setDoc(doc(db, "Users", `${currentUser.uid}`, 'Pin Saved', `${storageUri}`), {
-        storageUri: storageUri
+        storageUri: storageUri,
+        title: pin.title,
+        file: pin.file
+
       })
 
       console.log('ryu otra vez')
@@ -111,6 +117,15 @@ return commentQ;
   }
   catch{
     console.log("Ryuk doesn't want the data")
+  }
+}
+
+async function deletePin(){
+  try{
+    await deleteDoc(doc(db, "Pin", `${storageUri}`))
+  }
+  catch{
+    console.log('Ryuk could not delete the file')
   }
 }
 
@@ -131,6 +146,9 @@ return commentQ;
           saveComment={saveComment}
           commentQuery={commentQuery}
           savePin={savePin}
+          key={storageUri}
+          currentUser={currentUser}
+          deletePin={deletePin}
         />
       )
     }
@@ -140,18 +158,31 @@ return commentQ;
 }
 
 const Pin = (props) => {
-  const {pin, pinComment, setPinComment, saveComment, commentQuery, savePin} = props
+  const {pin, pinComment, setPinComment, saveComment, commentQuery, savePin, currentUser, deletePin} = props
 
+  console.log(currentUser)
+  console.log(pin)
   return(
 
       <div className="pinBody">
         <img className='pinImg' src={pin.file}/>
       <div className="pinText">
+
+        { (currentUser.uid == pin.uid)
+        ? <Link to="/" className='colorBtnD'>
+        <SimpleButton
+        className='colorBtnD'
+        text='X'
+        fn={deletePin}
+        />
+         </Link>
+        :
         <SimpleButton
           className='colorBtn'
           text='Save'
           fn={savePin}
           />
+          }
         <UserDisplay
           userImg={pin.userImg}
           userName={pin.userName}

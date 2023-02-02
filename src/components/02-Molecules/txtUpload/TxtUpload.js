@@ -15,8 +15,7 @@ export const TxtUpload = (props) =>{
       maxLength='50'
       state={pinTitle}
       setState={setPinTitle}/>
-      
-      <p className="userName">JoJoVeller</p>
+     
       <TxtInput
        id='pinDescription'
        labelTxt='Add a Description'

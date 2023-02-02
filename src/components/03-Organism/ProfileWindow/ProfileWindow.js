@@ -8,32 +8,13 @@ import { Outlet } from "react-router-dom";
 import { db } from "../../../App";
 import { PinPreview } from "../../02-Molecules/ImgPreview/PinPreview";
 import { Link } from "react-router-dom";
-import {collection, query, getDocs, where, getDoc, doc} from 'firebase/firestore';
+import {collection, query, getDocs, where, getDoc, doc, orderBy, limit} from 'firebase/firestore';
 
 
 export const ProfileWindow = (props) =>{
 
   const {currentUser, setSavedPinURI} = props
 
-  useEffect(() =>{
-    const fetchPinURI = async () =>{
-    const pinInfo = await fetchSavedPinURI();
-    setSavedPinURI(pinInfo);
-    }
-    fetchPinURI()
-    },[]);
-
-    async function fetchSavedPinURI(){
-      const savedPinQ=[]
-      try{
-            const pinsURIsnapshot = await getDocs(query(collection(db, "Users", `${currentUser.uid}`, 'Pin Saved')));
-            pinsURIsnapshot.forEach((pin) => { 
-              let savedPinURI= pin.data().storageUri
-                  return savedPinQ.push(savedPinURI)
-            })}
-      catch{console.log("Ryuk doesn't want the data")}
-          return savedPinQ
-        }
 
 
   return(
@@ -63,61 +44,63 @@ export const ProfileWindow = (props) =>{
   )
 }
 
-// export const SavedPins = (props) => {
-
-//   const [savedPins, setSavedPins] = useState([]);
-//   // const [savedPinURI, setSavedPinURI] = useState();
-
-//   const {currentUser, savedPinURI} = props
-  
-
-//    useEffect(() => {
-//     console.log(savedPins)
-//     const fetchPins = async () =>{
-//     await fetchSavedPins()
-//     console.log(savedPins)
-//     }
-//     fetchPins()
-//    },[]);
-
-
-//     async function fetchSavedPins(){
-//       const savedPinQ=[]
-//       try{
-//           savedPinURI.forEach( async (pinURI) => { 
-//           const savedPinSnapshot = await getDoc(doc(db, 'Pin', `${pinURI}` ))           
-//           let pin = savedPinSnapshot.data();
-//           return savedPinQ.push(pin)
-//           })
-//           return setSavedPins(savedPinQ)
-//         }
-//       catch{console.log("Ryuk doesn't want the data")}
-//     return 
-//     }    
-
-  
-
-
-//   return(
-//     <div className="profilePins">
-//       {
-//       (
-//       savedPins.map(pin => 
-//         <Link to={`/Pin/${pin.storageUri}`} key={pin.storageUri}>
-//           <PinPreview
-//             pin={pin}
-//           />
-//         </Link>
-//         )
-//       )
-//       }
-
-  
-//     </div>
-//   )
-// }
-
 export const SavedPins = (props) => {
+
+  const [savedPins, setSavedPins] = useState([]);
+  // const [savedPinURI, setSavedPinURI] = useState();
+
+  const {currentUser} = props
+  
+
+   useEffect(() => {
+    console.log(savedPins)
+    const fetchPins = async () =>{
+    await fetchSavedPins()
+    console.log(savedPins)
+    }
+    fetchPins()
+   },[]);
+
+
+    async function fetchSavedPins(){
+      const savedPinQ=[]
+      try{
+
+          const savedPinSnapshot = await getDocs(query(collection(db, 'Users', `${currentUser.uid}`, 'Pin Saved' )));           
+          savedPinSnapshot.forEach(pin =>{
+          const savedPin = pin.data()
+          return savedPinQ.push(savedPin)
+          })
+          return setSavedPins(savedPinQ)
+
+        }
+      catch{console.log("Ryuk doesn't want the data")}
+    return 
+    }    
+
+  
+
+
+  return(
+    <div className="profilePins">
+      {
+      (
+      savedPins.map(pin => 
+        <Link to={`/Pin/${pin.storageUri}`} key={pin.storageUri}>
+          <PinPreview
+            pin={pin}
+          />
+        </Link>
+        )
+      )
+      }
+
+  
+    </div>
+  )
+}
+
+export const CreatedPin = (props) => {
 
   const [createdPins, setCreatedPins] = useState([]);
   // const [savedPinURI, setSavedPinURI] = useState();

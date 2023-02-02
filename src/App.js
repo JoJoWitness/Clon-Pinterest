@@ -3,7 +3,7 @@ import { HomeBody } from "./components/03-Organism/HomeBody/HomeBody";
 import { NavBar } from "./components/03-Organism/Navbar/Navbar";
 import { UploadWindow } from "./components/03-Organism/UploadWindow/UploadWindow";
 import { PinDetails } from "./components/03-Organism/PinDetails/PinDetails";
-import { ProfileWindow, SavedPins } from "./components/03-Organism/ProfileWindow/ProfileWindow";
+import { CreatedPin, ProfileWindow, SavedPins } from "./components/03-Organism/ProfileWindow/ProfileWindow";
 import './main.scss'
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebase-config";
@@ -102,7 +102,7 @@ useEffect(()=>{
       <Route path='Pin/:uri' element={<PinDetails currentUser={currentUser}/>}/>
       <Route path='Profile' element={<ProfileWindow currentUser={currentUser} setSavedPinURI={setSavedPinURI}/>}>
         <Route index element={<SavedPins currentUser={currentUser} />}/>
-        <Route path='Profile/created'/>
+        <Route path='Created' element={<CreatedPin currentUser={currentUser}/>}/>
       </Route>
     </Routes> 
 

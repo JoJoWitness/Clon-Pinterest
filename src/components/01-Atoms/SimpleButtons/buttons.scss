@@ -45,7 +45,7 @@
   background-color: color.$black-fontBg-clon;
 }
 
-.colorBtn{
+.colorBtn, .colorBtnD{
   width: 100px;
   height: 48px;
   border: none;
@@ -55,6 +55,13 @@
   background-color: color.$pink-clon;
   justify-self: flex-end;
   font-weight: 500;
+}
+
+.colorBtnD{
+  width: 50px;
+  border-radius: 50%;
+  font-size: 17px;
+
 }
 
 .profileBtns{
@@ -71,6 +78,7 @@
   color: color.$black-fontBg-clon;
 }
 
-.profileBtns:hover{
+
+#active{
   border-bottom: 3px solid color.$black-fontBg-clon ;
 }
